@@ -1,22 +1,47 @@
-Escuela Colombiana de Ingeniería
-
-Arquitecturas de Software – ARSW
-
-####Taller – programación concurrente, condiciones de carrera y sincronización de hilos. EJERCICIO INDIVIDUAL O EN PAREJAS.
-
-#####Parte I – Antes de terminar la clase.
-
-Creación, puesta en marcha y coordinación de hilos.
-
-1. Revise el programa “primos concurrentes” (en la carpeta parte1), dispuesto en el paquete edu.eci.arsw.primefinder. Este es un programa que calcula los números primos entre dos intervalos, distribuyendo la búsqueda de los mismos entre hilos independientes. Por ahora, tiene un único hilo de ejecución que busca los primos entre 0 y 30.000.000. Ejecútelo, abra el administrador de procesos del sistema operativo, y verifique cuantos núcleos son usados por el mismo.
-
-2. Modifique el programa para que, en lugar de resolver el problema con un solo hilo, lo haga con tres, donde cada uno de éstos hará la tarcera parte del problema original. Verifique nuevamente el funcionamiento, y nuevamente revise el uso de los núcleos del equipo.
-
-3. Lo que se le ha pedido es: debe modificar la aplicación de manera que cuando hayan transcurrido 5 segundos desde que se inició la ejecución, se detengan todos los hilos y se muestre el número de primos encontrados hasta el momento. Luego, se debe esperar a que el usuario presione ENTER para reanudar la ejecución de los mismo.
 
 
+## Escuela Colombiana de Ingeniería - Arquitecturas de Software | Taller – programación concurrente, condiciones de carrera y sincronización de hilos. EJERCICIO INDIVIDUAL O EN PAREJAS.
 
-#####Parte II 
+
+### Parte I – Antes de terminar la clase. Creación, puesta en marcha y coordinación de hilos.
+---
+**1. Revise el programa “primos concurrentes” (en la carpeta parte1), dispuesto en el paquete edu.eci.arsw.primefinder. Este es un programa que calcula los números primos entre dos intervalos, distribuyendo la búsqueda de los mismos entre hilos independientes. Por ahora, tiene un único hilo de ejecución que busca los primos entre 0 y 30.000.000. Ejecútelo, abra el administrador de procesos del sistema operativo, y verifique cuantos núcleos son usados por el mismo.**
+
+#### Gráfico
+![img](./img/image1.png)
+
+
+#### Análisis
+En la línea roja del screenshot se observa el inicio de la ejecución del código, mostrando que el programa utiliza todos los hilos del sistema (en este caso 4). 
+
+Aunque la lógica se implementa en un solo hilo, el sistema operativo y la maquina virtual de java (JVM) reparten las tareas entre los núcleos disponibles, ejecutando instrucciones según la disponibilidad de recursos. Esto optimiza el rendimiento y los tiempos de ejecución.
+
+
+---
+
+**2. Modifique el programa para que, en lugar de resolver el problema con un solo hilo, lo haga con tres, donde cada uno de éstos hará la tarcera parte del problema original. Verifique nuevamente el funcionamiento, y nuevamente revise el uso de los núcleos del equipo.**
+
+#### Datos
+Como el intervalo total es $30\,000\,000$, vamos a dividirlo en el numero de hilos así:
+
+- **Hilo 1:** $[1, 10\,000\,000]$
+
+- **Hilo 2:** $(10\,000\,000, 20\,000\,000]$
+
+- **Hilo 3:** $(20\,000\,000, 30\,000\,000]$
+
+
+
+#### Gráfico
+![img](./img/image2.png)
+
+---
+
+**3. Lo que se le ha pedido es: debe modificar la aplicación de manera que cuando hayan transcurrido 5 segundos desde que se inició la ejecución, se detengan todos los hilos y se muestre el número de primos encontrados hasta el momento. Luego, se debe esperar a que el usuario presione ENTER para reanudar la ejecución de los mismo.**
+
+
+
+### Parte II 
 
 
 Para este ejercicio se va a trabajar con un simulador de carreras de galgos (carpeta parte2), cuya representación gráfica corresponde a la siguiente figura:
