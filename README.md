@@ -86,6 +86,10 @@ Taller.
     deberían despertarse y continuar con la carrera. Diseñe una solución que permita hacer esto utilizando los mecanismos de sincronización con las primitivas de los Locks provistos por el lenguaje (wait y notifyAll).
 
 
+#### Screenshots
+![](img/part2_1.png)
+
+
 ## Criterios de evaluación
 
 1. Funcionalidad.
