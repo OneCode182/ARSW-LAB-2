@@ -1,6 +1,12 @@
 
+### ARSW - Arquitecturas de Software | Escuela Colombiana de Ingeniería
+### Laboratorio No.2 | Taller – programación concurrente, condiciones de carrera y sincronización de hilos. EJERCICIO INDIVIDUAL O EN PAREJAS.
 
-## Escuela Colombiana de Ingeniería - Arquitecturas de Software | Taller – programación concurrente, condiciones de carrera y sincronización de hilos. EJERCICIO INDIVIDUAL O EN PAREJAS.
+___
+
+**Integrantes (Grupo 1)**
+  - Sergio Andrey Silva Rodríguez
+  - Gerónimo Martínez Núñez
 
 
 ### Parte I – Antes de terminar la clase. Creación, puesta en marcha y coordinación de hilos.
@@ -10,11 +16,10 @@
 #### Gráfico
 ![img](./img/image1.png)
 
-
-#### Análisis
-En la línea roja del screenshot se observa el inicio de la ejecución del código, mostrando que el programa utiliza todos los hilos del sistema (en este caso 4). 
-
-Aunque la lógica se implementa en un solo hilo, el sistema operativo y la maquina virtual de java (JVM) reparten las tareas entre los núcleos disponibles, ejecutando instrucciones según la disponibilidad de recursos. Esto optimiza el rendimiento y los tiempos de ejecución.
+> [!NOTE]
+> En la línea roja del screenshot se observa el inicio de la ejecución del código, mostrando que el programa utiliza todos los hilos del sistema (en este caso 4). 
+>
+> Aunque la lógica se implementa en un solo hilo, el sistema operativo y la maquina virtual de java (JVM) reparten las tareas entre los núcleos disponibles, ejecutando instrucciones según la disponibilidad de recursos. Esto optimiza el rendimiento y los tiempos de ejecución.
 
 
 ---
@@ -69,12 +74,34 @@ Taller.
 
     b.  Puede utilizarse el método join() de la clase Thread para sincronizar el hilo que inicia la carrera, con la finalización de los hilos de los galgos.
 
+
+    ```java
+    for (int i = 0; i < can.getNumCarriles(); i++) {
+        try {
+            galgos[i].join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    ```
+
+
 2.  Una vez corregido el problema inicial, corra la aplicación varias
     veces, e identifique las inconsistencias en los resultados de las
     mismas viendo el ‘ranking’ mostrado en consola (algunas veces
     podrían salir resultados válidos, pero en otros se pueden presentar
     dichas inconsistencias). A partir de esto, identifique las regiones
     críticas () del programa.
+
+    ```java
+    if (paso == carril.size()) {
+        synchronized (regl) {
+            carril.finish();
+            int ubicacion = regl.asignarPosicion(this.getName());
+            System.out.println("Galgo #" + this.getName() + " | POS: " + ubicacion);
+        }
+    }
+    ```
 
 3.  Utilice un mecanismo de sincronización para garantizar que a dichas
     regiones críticas sólo acceda un hilo a la vez. Verifique los
@@ -85,6 +112,9 @@ Taller.
     deberían dormirse, y cuando se haga clic en ‘Continue’ los mismos
     deberían despertarse y continuar con la carrera. Diseñe una solución que permita hacer esto utilizando los mecanismos de sincronización con las primitivas de los Locks provistos por el lenguaje (wait y notifyAll).
 
+
+> [!IMPORTANT]
+> Esta funcionalidad está actualmente en la ejecución práctica del programa.
 
 #### Screenshots
 ![](img/part2_1.png)
